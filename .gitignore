@@ -1,0 +1,12 @@
+.metadata/
+.settings/
+Debug/
+
+RemoteSystemsTempFiles
+*language.settings.xml
+
+*.launch
+
+
+*.cfg
+.mxproject
