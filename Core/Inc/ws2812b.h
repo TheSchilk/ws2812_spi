@@ -32,8 +32,8 @@
 #define WS2812B_8BIT_0_BASE 0x07   // 3 bit (default)
 //#define WS2812B_8BIT_0_BASE 0x0F // 4 bit
 
-// Enable/Disable 0 prefix:
-// Incompatible with 7-bit '1' representation.
+// Enable/disable 0 prefix by commenting the below line.
+// 0 prefix is incompatible with 7-bit '1' representation.
 #define WS2812_8BIT_0_PREF
 
 // === 4-bit packing configuration: ===
@@ -46,8 +46,8 @@
 #define WS2812B_4BIT_0_BASE 0x01   // 1 bit (default)
 //#define WS2812B_4BIT_0_BASE 0x03 // 2 bit
 
-// Enable/Disable 0 prefix:
-// Incompatible with 4-bit '1' representation.
+// Enable/disable 0 prefix by commenting the below line.
+// 0 prefix is incompatible with 3-bit '1' representation.
 #define WS2812_4BIT_0_PREF
 
 // === General configuration: ===
