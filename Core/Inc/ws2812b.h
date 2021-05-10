@@ -19,11 +19,15 @@
 // === 8-bit packing configuration: ===
 
 // Select number of bits that represent a '1' in 8-bit packing:
-//#define WS2812B_8BIT_1_BASE 0x1F // 5 bit
-#define WS2812B_8BIT_1_BASE 0x3F   // 6 bit (default)
-//#define WS2812B_8BIT_1_BASE 0x7F // 7 bit
+//#define WS2812B_8BIT_1_BASE 0x03   // 2 bit
+//#define WS2812B_8BIT_1_BASE 0x07   // 3 bit
+//#define WS2812B_8BIT_1_BASE 0x0F   // 4 bit
+//#define WS2812B_8BIT_1_BASE 0x1F   // 5 bit
+#define WS2812B_8BIT_1_BASE 0x3F     // 6 bit (default)
+//#define WS2812B_8BIT_1_BASE 0x7F   // 7 bit
 
 // Select number of bits that represent a '0' in 8-bit packing:
+//#define WS2812B_8BIT_0_BASE 0x01 // 1 bit
 //#define WS2812B_8BIT_0_BASE 0x03 // 2 bit
 #define WS2812B_8BIT_0_BASE 0x07   // 3 bit (default)
 //#define WS2812B_8BIT_0_BASE 0x0F // 4 bit
@@ -67,24 +71,12 @@ typedef struct {
 	uint8_t blue;
 } ws2812b_led_t;
 
-typedef enum{
-	WS2812B_GREEN = 0,
-	WS2812B_RED = 1,
-	WS2812B_BLUE = 2,
-	WS2812B_LAST_COLOR = 2
-}ws2812b_color_t;
-
 typedef struct {
 	ws2812b_packing_t packing;
 	uint32_t led_count;
-
 	ws2812b_led_t *leds;
-
-	uint32_t iter_led; // Current LED for iteration
-	ws2812b_color_t iter_color; // Current color for iteration
-	uint_fast8_t iter_bit; // Current bit for iteration
-	uint_fast8_t iter_done; // Iteration done flag
 } ws2812b_handle_t;
+
 
 #define WS2812B_REQUIRED_BUFFER_LEN(led_count, packing) ((led_count*(packing == WS2812B_PACKING_8b ? 24 : 12))+WS2812B_PREFIX_LEN+WS2812B_SUFFIX_LEN)
 

@@ -74,63 +74,17 @@ void ws2812b_fill_buffer(ws2812b_handle_t *ws, uint8_t *buffer){
 }
 
 void ws2812b_iter_restart(ws2812b_handle_t *ws){
-	ws->iter_led = 0;
-	ws->iter_color = 0;
-	ws->iter_bit = 0;
-	ws->iter_done = (ws->led_count == 0) ? 0 : 1;
+	// TODO
 }
 
 uint_fast8_t ws2812b_iter_is_finished(ws2812b_handle_t *ws){
-	return ws->iter_done;
+	// TODO
+	return 0;
 }
 
 uint8_t ws2812b_iter_next(ws2812b_handle_t *ws){
-	if(ws->iter_done){
-		return 0;
-	}
-
-	// Pick out current color byte
-	uint8_t current_byte;
-	switch(ws->iter_color){
-	case WS2812B_GREEN:
-		current_byte = ws->leds[ws->iter_led].green;
-	case WS2812B_RED:
-		current_byte = ws->leds[ws->iter_led].red;
-	case WS2812B_BLUE:
-		current_byte = ws->leds[ws->iter_led].red;
-	default:
-		return 0;
-	}
-
-	// Determine result
-	uint8_t result;
-	if(ws->packing == WS2812B_PACKING_4b){
-		// 4b packing
-		result = construct_4b_bit(ws->iter_bit, current_byte);
-		ws->iter_bit += 2;
-	} else {
-		// 8b packing
-		result = construct_8b_bit(ws->iter_bit, current_byte);
-		ws->iter_bit += 1;
-	}
-
-	// Move on to next color/led if necessary
-	if(ws->iter_bit == 8){
-		// Done with this color
-		ws->iter_bit = 0;
-		if(ws->color != WS2812B_LAST_COLOR){
-			ws->color++;
-		} else {
-			// Done with this LED
-			ws->color = 0;
-			if(ws->iter_led != ws->led_count-1){
-				ws->iter_led++;
-			} else {
-				// Finished!
-				ws->iter_done = 1;
-			}
-		}
-	}
+	// TODO
+	return 0;
 }
 
 // private functions

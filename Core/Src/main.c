@@ -119,7 +119,6 @@ int main(void)
   hws2812b.led_count = 3;
   hws2812b.leds = leds;
 
-
   uint8_t dma_buf[WS2812B_REQUIRED_BUFFER_LEN(hws2812b.led_count, hws2812b.packing)];
 
   /* USER CODE END 2 */
