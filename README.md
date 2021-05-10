@@ -28,7 +28,7 @@ This driver can be used in two ways: Buffered or unbuffered.
 In this mode, all LED information is converted and saved into a single buffer.
 This buffer can then be transmitted as a whole, for example using DMA.
 
-This method has a larger RAM overhead: An additional 24 bytes are per LED.
+This method has a larger RAM overhead: An additional 24 bytes are required per LED.
 
 However, it is usually the easiest to use and, if used with DMA, will usually
 provide the most consistent timing. 
@@ -57,7 +57,7 @@ bits sent via the SPI port (4-bit packing or 8-bit packing)
 
 While 4-bit packing will need less RAM space in buffered mode and allow the SPI port 
 to be run at a lower frequency, it leaves less timing margin that 8-bit packing mode. 
-Therefor it is more likely for 8-bit packing to work on a give platform.
+Therefore it is more likely for 8-bit packing to work on a give platform.
 
 ## Configuration 
 
@@ -105,19 +105,21 @@ This can behavior can be disabled using the `WS2812B_8BIT_0_PREF` and `WS2812B_4
 ## Usage: Buffered
 
 - Configure the SPI port and driver as described above.
-- Create an array of leds (ws2812b_led_t) and set the colors as desired.
-- Create a ws2812b_handle_t, set the desired packing, number of LEDs, and pointer to the array of leds created.
-- Create a uint8_t buffer of required length, which can be determined using the WS2812B_REQUIRED_BUFFER_LEN(led_count, packing) macro.
-- Fill the buffer using ws2812b_fill_buffer()
+- Create an array of leds (`ws2812b_led_t`) and set the colors as desired.
+- Create a `ws2812b_handle_t`, set the desired packing, number of LEDs, and pointer to the array of LEDs created.
+- Create a `uint8_t` buffer of required length, which can be determined using the `WS2812B_REQUIRED_BUFFER_LEN(led_count, packing)` macro.
+- Fill the buffer using `ws2812b_fill_buffer()`
 - Transmit buffer via SPI.
 
-To update the LEDs, the led array must be modified, the buffer re-filled, and re-transmitted.
+To update the LEDs, the led array cam be modified, the buffer re-filled, and re-transmitted.
+
 Make sure to respect the minimum time between packages before sending another package!
 
 ## Example: Buffered
 ```c
 // Init SPI....
 
+// Create array of LEDs
 ws2812b_led_t leds[3];
 // Set LED 0 to red
 leds[0].red = 0xff;
