@@ -136,7 +136,7 @@ int main(void)
 
 	ws2812b_fill_buffer(&hws2812b, dma_buf);
 
-	volatile HAL_StatusTypeDef err = HAL_SPI_Transmit_DMA(&hspi1, dma_buf, WS2812B_REQUIRED_BUFFER_LEN(hws2812b.led_count, hws2812b.packing));
+	HAL_SPI_Transmit_DMA(&hspi1, dma_buf, WS2812B_REQUIRED_BUFFER_LEN(hws2812b.led_count, hws2812b.packing));
 
 	HAL_Delay(200);
 
@@ -166,7 +166,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
   RCC_OscInitStruct.PLL.PLLM = 1;
-  RCC_OscInitStruct.PLL.PLLN = 24;
+  RCC_OscInitStruct.PLL.PLLN = 28;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV7;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
@@ -183,7 +183,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_3) != HAL_OK)
   {
     Error_Handler();
   }
