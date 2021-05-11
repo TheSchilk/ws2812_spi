@@ -42,8 +42,7 @@ In this mode, one byte at a time can be requested from the driver to be transmit
 This will reduce RAM-overhead, but will usually increase interrupt load.
 
 Furthermore the time between SPI bytes is critical and has to be consistent. Any
-interrupt-based implementation must run at a high enough priority to not be interrupt,
-and be handled quickly.
+interrupt-based implementation must run at a high enough priority to be handeled instantly.
 
 !!! TODO: ONLY BUFFERED IS IMPLEMENTED !!!!
 
@@ -56,7 +55,7 @@ A single pulse representing a single bit of LED information may be created using
 bits sent via the SPI port (4-bit packing or 8-bit packing)
 
 While 4-bit packing will need less RAM space in buffered mode and allow the SPI port 
-to be run at a lower frequency, it leaves less timing margin that 8-bit packing mode. 
+to be run at a lower frequency, it leaves less timing margin than 8-bit packing mode. 
 Therefore it is more likely for 8-bit packing to work on a give platform.
 
 ## Configuration 
@@ -106,7 +105,7 @@ This can behavior can be disabled using the `WS2812B_8BIT_0_PREF` and `WS2812B_4
 
 - Configure the SPI port and driver as described above.
 - Create an array of leds (`ws2812b_led_t`) and set the colors as desired.
-- Create a `ws2812b_handle_t`, set the desired packing, number of LEDs, and pointer to the array of LEDs created.
+- Create a `ws2812b_handle_t` handle, set the desired packing, number of LEDs, and pointer to the array of LEDs created.
 - Create a `uint8_t` buffer of required length, which can be determined using the `WS2812B_REQUIRED_BUFFER_LEN(led_count, packing)` macro.
 - Fill the buffer using `ws2812b_fill_buffer()`
 - Transmit buffer via SPI.
