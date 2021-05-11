@@ -93,10 +93,19 @@ uint8_t ws2812b_iter_next(ws2812b_handle_t *ws);
 #	error WS2812B: No 8-bit 0-representation selected.
 #endif /* WS2812B_8BIT_0_BASE */
 
+#ifndef WS2812B_4BIT_0_BASE
+#	error WS2812B: No 4-bit 0-representation selected.
+#endif /* WS2812B_8BIT_0_BASE */
+
+
 // '1' representation needs to be defined:
 #ifndef WS2812B_8BIT_1_BASE
 #	error WS2812B: No 8-bit 1-representation selected.
 #endif /* WS2812B_8BIT_1_BASE */
+
+#ifndef WS2812B_4BIT_1_BASE
+#	error WS2812B: No 4-bit 1-representation selected.
+#endif /* WS2812B_8BIT_0_BASE */
 
 // 8-bit 0-prefix and 7-bit '1' representation probably incompatible:
 // Very unlikely this will work on most platforms, but warning can be
