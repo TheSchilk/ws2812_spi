@@ -105,7 +105,7 @@ static void add_byte(ws2812b_handle_t *ws, uint8_t value, uint8_t **buffer){
 }
 
 static uint8_t construct_8b_bit(uint_fast8_t b, uint8_t value){
-	return (value & (1u << b) ? WS2812B_8BIT_1:WS2812B_8BIT_0);
+	return (value & ((0x80U) >> b) ? WS2812B_8BIT_1:WS2812B_8BIT_0);
 }
 
 static uint8_t construct_4b_bit(uint_fast8_t b, uint8_t value){
@@ -113,12 +113,12 @@ static uint8_t construct_4b_bit(uint_fast8_t b, uint8_t value){
 
 #	ifdef WS2812B_MSB_FIRST
 		// MSB is first
-		result = value & (1U << (b+1)) ? WS2812B_4BIT_1:WS2812B_4BIT_0;
-		result |= value & (1U << (b)) ? (WS2812B_4BIT_1<<4):(WS2812B_4BIT_0<<4);
+		result = value & ((0x80U) >> (b+1)) ? WS2812B_4BIT_1:WS2812B_4BIT_0;
+		result |= value & ((0x80U) >> (b)) ? (WS2812B_4BIT_1<<4):(WS2812B_4BIT_0<<4);
 #	else /* WS2812B_MSB_FIRST */
 		// LSB is first
-		result = value & (1U << (b)) ? WS2812B_4BIT_1:WS2812B_4BIT_0;
-		result |= value & (1U << (b+1)) ? (WS2812B_4BIT_1<<4):(WS2812B_4BIT_0<<4);
+		result = value & ((0x80U) >> (b)) ? WS2812B_4BIT_1:WS2812B_4BIT_0;
+		result |= value & ((0x80U) >> (b+1)) ? (WS2812B_4BIT_1<<4):(WS2812B_4BIT_0<<4);
 #	endif /* WS2812B_MSB_FIRST */
 
 	return result;
