@@ -106,7 +106,7 @@ int main(void)
 
   // LED 2 GREEN
   leds[1].red = 0;
-  leds[1].green = 0xff;
+  leds[1].green = 0x55;
   leds[1].blue = 0;
 
   // LED 3 BLUE
@@ -126,11 +126,31 @@ int main(void)
   hws2812b.led_count = 3;
   hws2812b.leds = leds;
 
+
   if(ws2812b_init(&hws2812b)){
 	  while(1){}
   }
 
   uint8_t dma_buf[WS2812B_REQUIRED_BUFFER(3,WS2812B_PACKING_SINGLE,1,4)];
+
+
+  // Test if iteration returns same as fill_buf, and correctly reports finished.
+  ws2812b_fill_buffer(&hws2812b, dma_buf);
+  for(int i = 0; i < WS2812B_REQUIRED_BUFFER(3,WS2812B_PACKING_SINGLE,1,4); i++){
+	  uint8_t should = dma_buf[i];
+	  uint8_t is = ws2812b_iter_next(&hws2812b);
+	  if(is != should){
+		  while(1){;}
+	  }
+	  if(ws2812b_iter_is_finished(&hws2812b) && i != WS2812B_REQUIRED_BUFFER(3,WS2812B_PACKING_SINGLE,1,4)-1){
+		  while(1){;}
+	  }
+  }
+
+  if(!ws2812b_iter_is_finished(&hws2812b)){
+	  while(1){;}
+  }
+
 
   /* USER CODE END 2 */
 
