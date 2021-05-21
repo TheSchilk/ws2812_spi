@@ -115,11 +115,22 @@ int main(void)
   leds[2].blue = 0xff;
 
   ws2812b_handle_t hws2812b;
-  hws2812b.packing = WS2812B_PACKING_8b;
+  hws2812b.config.packing = WS2812B_PACKING_SINGLE;
+  hws2812b.config.pulse_len_1 = WS2812B_PULSE_LEN_6b;
+  hws2812b.config.pulse_len_0 = WS2812B_PULSE_LEN_2b;
+  hws2812b.config.first_bit_0 = WS2812B_FIRST_BIT_0_ENABLED;
+  hws2812b.config.prefix_len = 1;
+  hws2812b.config.suffix_len = 4;
+  hws2812b.config.spi_bit_order = WS2812B_LSB_FIRST;
+
   hws2812b.led_count = 3;
   hws2812b.leds = leds;
 
-  uint8_t dma_buf[WS2812B_REQUIRED_BUFFER_LEN(hws2812b.led_count, hws2812b.packing)];
+  if(ws2812b_init(&hws2812b)){
+	  while(1){}
+  }
+
+  uint8_t dma_buf[WS2812B_REQUIRED_BUFFER(3,WS2812B_PACKING_SINGLE,1,4)];
 
   /* USER CODE END 2 */
 
@@ -135,9 +146,9 @@ int main(void)
 
 	ws2812b_fill_buffer(&hws2812b, dma_buf);
 
-	HAL_SPI_Transmit_DMA(&hspi1, dma_buf, WS2812B_REQUIRED_BUFFER_LEN(hws2812b.led_count, hws2812b.packing));
+	HAL_SPI_Transmit_DMA(&hspi1, dma_buf, WS2812B_REQUIRED_BUFFER(3,WS2812B_PACKING_SINGLE,1,4));
 
-	HAL_Delay(200);
+	HAL_Delay(10);
 
     /* USER CODE END WHILE */
 
