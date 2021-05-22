@@ -131,18 +131,18 @@ int main(void)
 	  while(1){}
   }
 
-  uint8_t dma_buf[WS2812B_REQUIRED_BUFFER(3,WS2812B_PACKING_SINGLE,1,4)];
+  uint8_t dma_buf[WS2812B_REQUIRED_BUFFER_LEN(3,WS2812B_PACKING_SINGLE,1,4)];
 
 
   // Test if iteration returns same as fill_buf, and correctly reports finished.
   ws2812b_fill_buffer(&hws2812b, dma_buf);
-  for(int i = 0; i < WS2812B_REQUIRED_BUFFER(3,WS2812B_PACKING_SINGLE,1,4); i++){
+  for(int i = 0; i < WS2812B_REQUIRED_BUFFER_LEN(3,WS2812B_PACKING_SINGLE,1,4); i++){
 	  uint8_t should = dma_buf[i];
 	  uint8_t is = ws2812b_iter_next(&hws2812b);
 	  if(is != should){
 		  while(1){;}
 	  }
-	  if(ws2812b_iter_is_finished(&hws2812b) && i != WS2812B_REQUIRED_BUFFER(3,WS2812B_PACKING_SINGLE,1,4)-1){
+	  if(ws2812b_iter_is_finished(&hws2812b) && i != WS2812B_REQUIRED_BUFFER_LEN(3,WS2812B_PACKING_SINGLE,1,4)-1){
 		  while(1){;}
 	  }
   }
@@ -166,7 +166,7 @@ int main(void)
 
 	ws2812b_fill_buffer(&hws2812b, dma_buf);
 
-	HAL_SPI_Transmit_DMA(&hspi1, dma_buf, WS2812B_REQUIRED_BUFFER(3,WS2812B_PACKING_SINGLE,1,4));
+	HAL_SPI_Transmit_DMA(&hspi1, dma_buf, WS2812B_REQUIRED_BUFFER_LEN(3,WS2812B_PACKING_SINGLE,1,4));
 
 	HAL_Delay(10);
 
