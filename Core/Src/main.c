@@ -100,24 +100,24 @@ int main(void)
 
   ws2812b_led_t leds[3];
   // LED 1 RED
-  leds[0].red = 0xff;
-  leds[0].green = 0;
-  leds[0].blue = 0;
+  leds[0].red = 0x00;
+  leds[0].green = 0xff;
+  leds[0].blue = 0x00;
 
   // LED 2 GREEN
-  leds[1].red = 0;
-  leds[1].green = 0x55;
-  leds[1].blue = 0;
+  leds[1].red = 0xff;
+  leds[1].green = 0x00;
+  leds[1].blue = 0x00;
 
   // LED 3 BLUE
-  leds[2].red = 0;
-  leds[2].green = 0;
+  leds[2].red = 0x00;
+  leds[2].green = 0x00;
   leds[2].blue = 0xff;
 
   ws2812b_handle_t hws2812b;
   hws2812b.config.packing = WS2812B_PACKING_SINGLE;
   hws2812b.config.pulse_len_1 = WS2812B_PULSE_LEN_6b;
-  hws2812b.config.pulse_len_0 = WS2812B_PULSE_LEN_2b;
+  hws2812b.config.pulse_len_0 = WS2812B_PULSE_LEN_3b;
   hws2812b.config.first_bit_0 = WS2812B_FIRST_BIT_0_ENABLED;
   hws2812b.config.prefix_len = 1;
   hws2812b.config.suffix_len = 4;
